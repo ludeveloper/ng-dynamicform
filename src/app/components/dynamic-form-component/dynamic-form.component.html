@@ -1,0 +1,51 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let section of source">
+        <div class="mb-3">
+            <h3>{{ section.label }}</h3>
+            <div [formGroupName]="section.label.toLowerCase().replace(' ', '_')">
+                <div *ngFor="let field of section.fields">
+
+                    <ng-container *ngIf="field.type !== 'dynamic'">
+                        <div [class]="field.type">
+                            <label class="label" [class]="field.type">{{ field.label }}</label>
+                            <ng-container *ngIf="field.type !== 'select'; else selectField">
+                                <input [class]="field.type" *ngIf="field.type !== 'textarea'; else textarea"
+                                    [type]="field.type" [formControlName]="field.name" />
+                                <ng-template #textarea>
+                                    <textarea [formControlName]="field.name"></textarea>
+                                </ng-template>
+                            </ng-container>
+                            <ng-template #selectField>
+                                <select [formControlName]="field.name">
+                                    <option *ngFor="let option of field.options" [value]="option.value">{{ option.label
+                                        }}
+                                    </option>
+                                </select>
+                            </ng-template>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="field.type === 'dynamic'">
+                        <label>{{ field.label }}</label>
+                        <div formArrayName="{{ field.type }}">
+                            <div *ngFor="let option of field.options; let i = index" [formGroupName]="i">
+                                <input type="text" formControlName="label" />
+                                <button type="button"
+                                    (click)="removeDynamicField(section.label.toLowerCase().replace(' ', '_'), i)">
+                                    Remove
+                                </button>
+                            </div>
+                            <button type="button"
+                                (click)="addDynamicField(section.label.toLowerCase().replace(' ', '_'))">
+                                Add Field
+                            </button>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <button type="submit" disabled="form.invalid">Submit</button>
+</form>
