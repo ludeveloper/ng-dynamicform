@@ -14,36 +14,6 @@ export class AppComponent {
   source = [
     {
       type: 'section',
-      label: 'Additional Information',
-      fields: [
-        {
-          type: 'textarea',
-          label: 'Bio',
-          name: 'bio',
-        },
-        {
-          type: 'dynamic',
-          label: 'Skills',
-          name: 'skills',
-          options: [
-            {
-              value: 'programming',
-              label: 'Programming',
-            },
-            {
-              value: 'design',
-              label: 'Design',
-            },
-            {
-              value: 'writing',
-              label: 'Writing',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'section',
       label: 'Personal Information',
       fields: [
         {
@@ -107,6 +77,36 @@ export class AppComponent {
           type: 'checkbox',
           label: 'Subscribe to newsletter',
           name: 'subscribe',
+        },
+      ],
+    },
+    {
+      type: 'section',
+      label: 'Additional Information',
+      fields: [
+        {
+          type: 'textarea',
+          label: 'Bio',
+          name: 'bio',
+        },
+        {
+          type: 'dynamic',
+          label: 'Skills',
+          name: 'skills',
+          options: [
+            {
+              value: 'programming',
+              label: 'Programming',
+            },
+            {
+              value: 'design',
+              label: 'Design',
+            },
+            {
+              value: 'writing',
+              label: 'Writing',
+            },
+          ],
         },
       ],
     },
